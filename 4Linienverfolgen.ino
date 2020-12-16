@@ -1,9 +1,11 @@
+Das Pr0gramm ist fertig um einer Linie zu folgen und eventuell ein ziemlicher Brecher für den Anfang, aber bis du hier bist hast du vielleicht schon einen Überblick :D
+
+/////LIBRARYS////////
 #include <Arduino.h>
 #include <Servo.h>
 #include <Adafruit_NeoPixel.h>
+/////////////////////
 
-
-//pr0boter V1 Frohe Weihnachten!
 
 //////VARIABELN//////
 int ServoLMitte = 1718 ; // Servos bekommen PWM Werte von 1000 bis 2000, da die hier verbastelt sind um dauerhaft zu drehen muss der Totpunkt bestimmt werden
@@ -12,7 +14,8 @@ int ServoLDrehrichtung = 1; // NUR 1 ODER -1 !!! tauschen wenn der Motor sich fa
 int ServoRMitte = 1499 ;
 int ServoRDrehrichtung = -1; // NUR 1 ODER -1 !!!
 
-int Geschwindigkeit = 20;   //wie schnell der R0boter fahren soll unter 20 ungenau über 100 keine Unterschiede mehr
+int Geschwindigkeit = 40;   //wie schnell der R0boter fahren soll unter 20 ungenau über 100 keine Unterschiede mehr
+
 
 int VoltagePin = A5;      // Spannungsmessung vom Akku hängt an Analog5
 double Voltage;           // in der Variable wird die AkkuSpannung gespeichert
@@ -28,18 +31,18 @@ int DunkelheitGrenzWertRechts = 0;
 
 #define LEDPIN 11   // LEDs hängen an DigitalPin 11
 #define LEDCOUNT 2    // es gibt 2 LEDs
-
 /////////////////////
 
+
+////INITIIERUNG//////
 Servo servoL; //sagt dem pr0gramm das es zwei Servos gibt links und rechts
 Servo servoR;
 
 Adafruit_NeoPixel strip(LEDCOUNT, LEDPIN, NEO_GRB + NEO_KHZ800); //sagt dem Pr0gramm das es die zwei LEDs gibt
-
 /////////////////////
 
-//////Funktionsnamen/////     // müssen hier oben alle einmal benannt werden
 
+//////FUNKTIONSNAMEN/////     // müssen hier oben alle einmal benannt werden
 void Stop();                  // damit das Pr0gramm weis das die Funktionen existieren
 void VorwaertsFahrt();
 void drehRechts();
@@ -50,10 +53,10 @@ void Linienverfolgen();
 int GetLichtSensorL();
 int GetLichtSensorR();
 void LichtSensorInit();
+/////////////////////////
 
 
-///////////////////////
-
+/////////SETUP////////////
 void setup() {                 // Setup läuft einmal am start durch und sagt dem Arduino zB was an welchem Pin hängt
 
   servoL.attach(ServoPinL);            //sagt dem Arduino das die zwei Servos exisitieren
@@ -66,11 +69,29 @@ void setup() {                 // Setup läuft einmal am start durch und sagt de
   LEDS();                      // Macht untere LED Weiß
   LichtSensorInit();           // Kalibriert Helligkeitssensoren
 }
+//////////////////////////
 
+
+///////LOOP///////////////
 void loop() {           // loop läuft nach dem Setup immer wieder durch, hier passiert das eigentlich spannende
+                                        ///NICHT ANFASSEN!! AKKU SCHUTZ/////
+  CheckVoltage();                       
+  if(Voltage < 3.7){                    
+    strip.setPixelColor(0, 100, 0, 0); 
+    strip.setPixelColor(1, 100, 0, 0);  
+    strip.show();
+    delay(10);                    // ohne dieses Delay verschluckt sich die schleife und die Motoren zucken stark
+    Stop();                       // hält die motoren an
+  }
+  else{
+                                        ////AB HIER DARFST DU WIEDER////////
   Linienverfolgen();    //funktion zum Linien verfolgen
+  }
 }
+///////////////////////////
 
+
+//////////FUNKTIONEN///////
 void LEDS(){                             // Funktion um LEDs am Anfang einzufärben
   strip.setPixelColor(0, 200, 200, 200); // erste LED (0) auf weiß
   strip.setPixelColor(1, 255, 0, 0);     // zweite LED (1) auf rot
@@ -89,13 +110,13 @@ void VorwaertsFahrt(){                                              // Funktion 
 }
 
 void drehRechts(){                                                  // Funktion zum rechtsrum drehen
-  servoL.writeMicroseconds(ServoLMitte - ServoLDrehrichtung*Geschwindigkeit);
+  servoL.writeMicroseconds(ServoLMitte - ServoLDrehrichtung*Geschwindigkeit*0.8);
   servoR.writeMicroseconds(ServoRMitte + ServoRDrehrichtung*Geschwindigkeit);
 }
 
 void drehLinks(){                                                   // Funktion zum linksrum drehen
   servoL.writeMicroseconds(ServoLMitte + ServoLDrehrichtung*Geschwindigkeit);
-  servoR.writeMicroseconds(ServoRMitte - ServoRDrehrichtung*Geschwindigkeit);
+  servoR.writeMicroseconds(ServoRMitte - ServoRDrehrichtung*Geschwindigkeit*0.8);
 }
 
 void Stop(){                                                        // Funktion um die Servos zu stoppen
@@ -106,7 +127,7 @@ void Stop(){                                                        // Funktion 
 int GetLichtSensorL(){                          //Funktion um den linken Lichtsensor auszulesen
   int value;
   value = analogRead(LichtSensorL);
-  for(int i = 0; i <20; i++){
+  for(int i = 0; i <20; i++){                     // Da der Lichtsensor wegen den LEDs viel schwankt nehme ich hier einen Durchschnitt von 20 Werten
     value = value + analogRead(LichtSensorL);
   }
   value = value / 20;
@@ -176,3 +197,4 @@ void Linienverfolgen(){                                                         
     delay(50);
   }
 }
+/////////////////////////////
