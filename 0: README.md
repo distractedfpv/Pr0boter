@@ -18,6 +18,16 @@ Unter Tools, Comport, beobachte mal welcher COM port auftaucht wenn du den Robot
 
 Schon kann es losgehen!
 
+PaketInhalt:
+2x Halloren Kugeln, die wurden mir mal verwichtelt und seitdem bin ich süchtig danke hier nochmal an @UnseenKill
+1x RitterSport
+Unmengen an Tee um über die kalten Tage zu kommen
+1x Edding zum Linien malen
+1x 18650 Akku
+1x Ladegerät
+1x der erste funktionsfähige Pr0boter!
+Eine Menge Kot im Github:
+https://github.com/distractedfpv/Pr0boter/edit/main/0:%20README.md
 Printfiles:
 ThingiverseLink einfügen
 
