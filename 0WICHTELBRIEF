@@ -1,9 +1,14 @@
 Frohe Weihnachten Bartalomeus!
-Ich hoffe ich kann dir eine Freude mit dem kleinen Roboter machen. Der Gute ist komplett selbst entworfen und programmiert.
+Ich hoffe ich kann dir eine Freude mit dem kleinen Roboter machen.
+Der Gute ist komplett selbst entworfen und pr0grammiert.
 Du meintest ja das du technikbegeistert bist, aber nicht programmieren kannst. Das ändern wir jetzt!
+Ich wünsche dir und allen dir nahe stehenden ein frohes Fest und ein hoffentlich besseres 2021.
+Grüße deine Schnecken von mir, ich wusste leider nicht was ich denen schenken kann.
+Möge dein Benis wachsen, Heil Gamb!
+~Alpollo
 
 Als erstes kannst du dir mal ein weißes Papier besorgen und eine leicht geschwungene Linie etwa zwei Eddinglinien dick malen.
-Dann steckst du den Akku rein (der kann ein wenig sehr fest sitzen) und stellst ihn auf das Papier bevor die LED aufhört rot zu leuchten.
+Dann steckst du den Akku rein (kniffelig) und stellst ihn auf das Papier bevor die LED aufhört rot zu leuchten.
 Mit ein wenig Glück kann er jetzt der Linie hinterher fahren.
 
 Mit dem Ladegerät kannst du den Akku auch wieder laden. Der Roboter macht sich schon bemerkbar falls der Akku leer ist.
@@ -17,6 +22,7 @@ Dann gehst du auf Tools, Board: und stellst Nano ein Dann auf Tools, Processor: 
 Unter Tools, Comport, beobachte mal welcher COM port auftaucht wenn du den Roboter mit Usb verbindest und verschwindet wenn du wieder trennst, den wählst du aus.
 
 Schon kann es losgehen!
+Lad dir von hier das erste Pr0gramm runter und öffne es in der Arduino IDE, das kannst du dann lesen, verändern, auf den Arduino spielen und lernen.
 
 PaketInhalt:
 2x Halloren Kugeln, die wurden mir mal verwichtelt und seitdem bin ich süchtig danke hier nochmal an @UnseenKill
